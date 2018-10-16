@@ -24,9 +24,6 @@ function preload() {
   soundMove = loadSound('assets/moving.wav');
 }
 
-function setup() {
-}
-
 function draw() {
   if (mouseIsPressed) {
     x = 295;
@@ -41,8 +38,6 @@ function draw() {
   }
 
 }
-
-
 
 function keyPressed() {
   if (keyCode === LEFT_ARROW && x > 0) {
