@@ -23,7 +23,7 @@ function draw() {
   h = hour();
   m = minute();
   s = second();
-	noFill();
+  noFill();
 
   checkDayOrNight();
   nightModeDetect();
@@ -34,7 +34,8 @@ function draw() {
 function checkDayOrNight() {
   if (h <= 7 || h >= 19) {
     dayOrNight = 0;
-  } else {
+  }
+  else {
     dayOrNight = 1;
   }
 }
@@ -43,46 +44,51 @@ function nightModeDetect() {
   if (dayOrNight === 1) {
     background(240);
     stroke(1);
-  } else {
+  }
+  else {
     background(0);
     stroke(255);
   }
 
   strokeWeight(1);
-  text('Current time:\n' + h + ':' + m + ':' + s, 5, 25);
+  text("Current time:\n" + h + ":" + m + ":" + s, 5, 25);
 }
 
 function drawClock() {
   translate(300, 300);
 
-  stroke('purple');
+  stroke("purple");
   strokeWeight(5);
   if (h === 0 || h === 12) {
     arc(0, 0, 200, 200, 270);
-  } else {
+  }
+  else {
     arc(0, 0, 200, 200, 270, 270 + 30 * h);
   } //this if statement eliminates a funny error when s, m or h returns zero
 
   stroke(100, 255, 255);
   if (m === 0) {
     arc(0, 0, 180, 180, 270);
-  } else {
+  }
+  else {
     arc(0, 0, 180, 180, 270, 270 + 6 * m);
   }
 
   stroke(0, 204, 0);
   if (s === 0) {
     arc(0, 0, 160, 160, 270);
-  } else {
+  }
+  else {
     arc(0, 0, 160, 160, 270, 270 + 6 * s);
   }
 }
 
 function keyPressed() {
-  if (keyCode === ESCAPE && timeTrigger === 0) {
+  if (keyCode === ESCAPE && timerTrigger === 0) {
     timerTrigger = 1;
-  } else if (keyCode === ESCAPE && timeTrigger === 1) {
-    timeTrigger = 0;
+  }
+  else if (keyCode === ESCAPE && timerTrigger === 1) {
+    timerTrigger = 0;
   }
 }
 
@@ -96,13 +102,13 @@ function askForTimer() {
   input = createInput();
   input.position(5, 50);
 
-  button = createButton('submit');
+  button = createButton("submit");
   button.position(input.x + input.width, 65);
   button.mousePressed(timerValue);
 }
 
 function timerValue() {
-  let timer = imput.value();
+  let timer = input.value();
   if (frameCount % 60 === 0 && timer > 0) {
     timer --;
   }
