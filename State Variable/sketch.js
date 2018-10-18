@@ -17,6 +17,7 @@ let dayOrNight = 1; //1 is day 0 is night Also the state variable
 function setup() {
   createCanvas(600, 600);
   angleMode(DEGREES);
+  giveBox();
 }
 
 function draw() {
@@ -25,7 +26,6 @@ function draw() {
   s = second();
   noFill();
 
-  giveBox();
   checkDayOrNight();
   nightModeDetect();
   drawClock();
@@ -93,7 +93,15 @@ function giveBox() {
 }
 
 
-function checkTimer() {
-  let timer = input.value();
-
-}
+// function checkTimer() {
+//   let timer;
+//   for (timer === input.value(); frameCount % 60 === 0; timer > 0) {
+//     timer --;
+//     push();
+//     translate(300, 300);
+//     stroke('red');
+//     strokeWeight(5);
+//     arc(0, 0, 140, 140, 270, 270 + 360/int(timer));
+//     pop();
+//   }
+// }
