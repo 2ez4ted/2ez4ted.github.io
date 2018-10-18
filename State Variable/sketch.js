@@ -5,11 +5,11 @@
 // You may also use its timer function
 // Extra for Experts:
 // initally I also wrote down a countdown program with the clock but the way
-// I did it was crappy
+//
 let h, m, s;
 let input, button;
 let dayOrNight = 1; //1 is day 0 is night Also the state variable
-let timerTrigger = 0;
+
 
 
 
@@ -17,6 +17,7 @@ let timerTrigger = 0;
 function setup() {
   createCanvas(600, 600);
   angleMode(DEGREES);
+  giveBox();
 }
 
 function draw() {
@@ -28,7 +29,6 @@ function draw() {
   checkDayOrNight();
   nightModeDetect();
   drawClock();
-  checkIfTimerOn();
 }
 
 function checkDayOrNight() {
@@ -83,36 +83,25 @@ function drawClock() {
   }
 }
 
-function keyPressed() {
-  if (keyCode === ESCAPE && timerTrigger === 0) {
-    timerTrigger = 1;
-  }
-  else if (keyCode === ESCAPE && timerTrigger === 1) {
-    timerTrigger = 0;
-  }
-}
-
-function checkIfTimerOn() {
-  if (timerTrigger === 1) {
-    askForTimer();
-  }
-}
-
-function askForTimer() {
-  input = createInput();
-  input.position(5, 50);
+function giveBox() {
+	input = createInput();
+  input.position(5, 75);
 
   button = createButton("submit");
-  button.position(input.x + input.width, 65);
-  button.mousePressed(timerValue);
+  button.position(input.x + input.width, 75);
+  button.mousePressed(checkTimer);
 }
 
-function timerValue() {
-  let timer = input.value();
-  if (frameCount % 60 === 0 && timer > 0) {
-    timer --;
-  }
-  if (timer === 0) {
-    text("Time UP", 300, 420);
-  }
-}
+
+// function checkTimer() {
+//   let timer;
+//   for (timer === input.value(); frameCount % 60 === 0; timer > 0) {
+//     timer --;
+//     push();
+//     translate(300, 300);
+//     stroke('red');
+//     strokeWeight(5);
+//     arc(0, 0, 140, 140, 270, 270 + 360/int(timer));
+//     pop();
+//   }
+// }
