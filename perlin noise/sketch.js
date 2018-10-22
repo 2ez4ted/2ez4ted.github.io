@@ -12,8 +12,12 @@ let time = 0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  numberOfRects = 10;
+  numberOfRects = 400;
   rectWidth = width / numberOfRects;
+  generateRectangles();
+}
+
+function keyPressed() {
   generateRectangles();
 }
 
