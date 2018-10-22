@@ -2,22 +2,16 @@
 // Teddy Yan
 // October 15th, 2018
 // This is a clock that displays time in an unconventional way
-// You may also use its timer function
 // Extra for Experts:
-// initally I also wrote down a countdown program with the clock but the way
-//
+// I tried to write the timer function and debug it but it didnt work
+// so i only used hour, minute and second; drawing arcs and moving cordinates functions to complete this assignment
+// as the extra for experts
 let h, m, s;
-let input, button;
 let dayOrNight = 1; //1 is day 0 is night Also the state variable
-
-
-
-
 
 function setup() {
   createCanvas(600, 600);
   angleMode(DEGREES);
-  giveBox();
 }
 
 function draw() {
@@ -32,7 +26,7 @@ function draw() {
 }
 
 function checkDayOrNight() {
-  if (h <= 7 || h >= 19) {
+  if (h <= 7 || h >= 19) {//range of daytime given
     dayOrNight = 0;
   }
   else {
@@ -82,26 +76,3 @@ function drawClock() {
     arc(0, 0, 160, 160, 270, 270 + 6 * s);
   }
 }
-
-function giveBox() {
-	input = createInput();
-  input.position(5, 75);
-
-  button = createButton("submit");
-  button.position(input.x + input.width, 75);
-  button.mousePressed(checkTimer);
-}
-
-
-// function checkTimer() {
-//   let timer;
-//   for (timer === input.value(); frameCount % 60 === 0; timer > 0) {
-//     timer --;
-//     push();
-//     translate(300, 300);
-//     stroke('red');
-//     strokeWeight(5);
-//     arc(0, 0, 140, 140, 270, 270 + 360/int(timer));
-//     pop();
-//   }
-// }
