@@ -4,12 +4,8 @@
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
-let grid = [
-  [2, 8, 0, 0],
-  [0, 0, 0, 2],
-  [0, 16, 4, 0],
-  [0, 2, 2, 0]
-];
+let grid = [];
+let possibleStage = [0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048];
 let cellStage = 0;
 let cellSize = 105;
 
@@ -18,6 +14,8 @@ let cellSize = 105;
 
 function setup() {
   createCanvas(450, 670);
+  createGrid();
+  loadGrid();
 }
 
 function draw() {
@@ -69,8 +67,68 @@ function displayGrid() {
         rect(x*cellSize, y*cellSize, cellSize, cellSize);
         fill(0);
         text("16", x*cellSize + 18.75 , y*cellSize + 75);
+
+      }
+      else if (grid[y][x] === 32) {
+        fill(255, 102, 0); //fill for value 32
+        rect(x*cellSize, y*cellSize, cellSize, cellSize);
+        fill(0);
+        text("32", x*cellSize + 18.75 , y*cellSize + 75);
+      }
+      else if (grid[y][x] === 64) {
+        fill(255, 51, 0); //fill for value 64
+        rect(x*cellSize, y*cellSize, cellSize, cellSize);
+        fill(0);
+        text("64", x*cellSize + 18.75 , y*cellSize + 75);
+      }
+      else if (grid[y][x] === 128) {
+        fill(255, 153, 51); //fill for value 128
+        rect(x*cellSize, y*cellSize, cellSize, cellSize);
+        fill(0);
+        text("128", x*cellSize + 9.375 , y*cellSize + 75);
+      }
+      else if (grid[y][x] === 256) {
+        fill(255, 153, 255); //fill for value 256
+        rect(x*cellSize, y*cellSize, cellSize, cellSize);
+        fill(0);
+        text("256", x*cellSize + 9.375 , y*cellSize + 75);
+      }
+      else if (grid[y][x] === 512) {
+        fill(255, 102, 255); //fill for value 512
+        rect(x*cellSize, y*cellSize, cellSize, cellSize);
+        fill(0);
+        text("512", x*cellSize + 9.375 , y*cellSize + 75);
+      }
+      else if (grid[y][x] === 1024) {
+        fill(255, 0, 255); //fill for value 1024
+        rect(x*cellSize, y*cellSize, cellSize, cellSize);
+        fill(0);
+        text("1024", x*cellSize + 4.6875 , y*cellSize + 75);
+      }
+      else if (grid[y][x] === 2048) {
+        fill(255, 0, 0); //fill for value 2048
+        rect(x*cellSize, y*cellSize, cellSize, cellSize);
+        fill(0);
+        text("2048", x*cellSize + 4.6875 , y*cellSize + 75);
       }
     }
   }
+}
 
+function createGrid() {
+  let thisGrid = [];
+  for (let i = 0; i < 4; i++) {
+    thisGrid.push([]);
+    for (let j = 0; j < 4; j++) {
+      grid[i].push(0);
+    }
+  }
+}
+
+function loadGrid() {
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+      grid[j][i] = random(int(possibleStage));
+    }
+  }
 }
