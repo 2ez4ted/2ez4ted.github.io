@@ -4,8 +4,8 @@
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
-let grid = [];
-let possibleStage = [0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048];
+let grid;
+let possibleStage = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 4, 8,];
 let cellStage = 0;
 let cellSize = 105;
 
@@ -14,8 +14,7 @@ let cellSize = 105;
 
 function setup() {
   createCanvas(450, 670);
-  createGrid();
-  loadGrid();
+  grid = createGrid();
 }
 
 function draw() {
@@ -30,11 +29,11 @@ function draw() {
 //   update();
 // }
 
-// function update() {
-//   if (keyCode === "UP_ARROW") {
-//
-//   }
-// }
+function update() {
+  if (keyCode === "UP_ARROW") {
+
+  }
+}
 
 function displayGrid() {
   translate(15, 100);
@@ -115,20 +114,16 @@ function displayGrid() {
   }
 }
 
+
+
+
 function createGrid() {
   let thisGrid = [];
   for (let i = 0; i < 4; i++) {
     thisGrid.push([]);
     for (let j = 0; j < 4; j++) {
-      grid[i].push(0);
+      thisGrid[i].push(random(possibleStage));
     }
   }
-}
-
-function loadGrid() {
-  for (let i = 0; i < 4; i++) {
-    for (let j = 0; j < 4; j++) {
-      grid[j][i] = random(int(possibleStage));
-    }
-  }
+  return thisGrid;
 }
