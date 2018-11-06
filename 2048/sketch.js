@@ -8,6 +8,7 @@ let grid;
 let startingStages = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 4, 8,];
 let cellStage = 0;
 let cellSize = 105;
+let theKey;
 
 
 
@@ -25,15 +26,24 @@ function draw() {
   displayGrid();
 }
 
-// function keyPressed() {
-//   update();
-// }
+function keyTyped() {
+  if (key === "r") {
+    grid = createGrid();
+  }
+  else if (key === " ") {
+    theKey = key;
+    update();
+  }
+}
 
-// function update() {
-//   if (keyCode === "UP_ARROW") {
-//
-//   }
-// }
+function update() {
+  //generate a second grid
+  let nextGrid = [];
+  for (let i = 0; i < 4; i++) {
+    nextGrid[i] = [];
+  }
+
+}
 
 function displayGrid() {
   translate(15, 100);
