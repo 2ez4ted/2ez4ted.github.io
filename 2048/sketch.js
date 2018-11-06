@@ -5,7 +5,7 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 let grid;
-let possibleStage = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 4, 8,];
+let startingStages = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 4, 8,];
 let cellStage = 0;
 let cellSize = 105;
 
@@ -29,11 +29,11 @@ function draw() {
 //   update();
 // }
 
-function update() {
-  if (keyCode === "UP_ARROW") {
-
-  }
-}
+// function update() {
+//   if (keyCode === "UP_ARROW") {
+//
+//   }
+// }
 
 function displayGrid() {
   translate(15, 100);
@@ -122,7 +122,7 @@ function createGrid() {
   for (let i = 0; i < 4; i++) {
     thisGrid.push([]);
     for (let j = 0; j < 4; j++) {
-      thisGrid[i].push(random(possibleStage));
+      thisGrid[i].push(random(startingStages));
     }
   }
   return thisGrid;
