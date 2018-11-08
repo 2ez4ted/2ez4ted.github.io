@@ -5,7 +5,7 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 let grid;
-let startingStages = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 4, 8,];
+let startingStages = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 4, 8,];
 let cellStage = 0;
 let cellSize = 105;
 let theKey;
@@ -30,7 +30,7 @@ function keyTyped() {
   if (key === "r") {
     grid = createGrid();
   }
-  else if (key === " ") {
+  else if (key === "UP_ARROW" || key === "DOWN_ARROW" || key === "LEFT_ARROW" || key === "RIGHT_ARROW"){
     theKey = key;
     update();
   }
@@ -40,9 +40,36 @@ function update() {
   //generate a second grid
   let nextGrid = [];
   for (let i = 0; i < 4; i++) {
-    nextGrid[i] = [];
+    nextGrid.push([]);
+    for (let j = 0; j < 4; j++) {
+      nextGrid[i].push([]);
+    }
   }
 
+  //go through all the cells
+  for (let x = 4; x > 0; x--) {
+    for (let y = 0; y < 4; y++) {
+      if (grid[x][y] != 0) {
+        //moving up, down, right or left
+        if (theKey === 'UP_ARROW' && y != 0) {
+          nextGrid[x][y-1] === grid[x][y];
+        }
+        else if (theKey === "DOWN_ARROW" && y != 4) {
+          nextGrid[x][y+1] === grid[x][y];
+        }
+        else if (theKey === "RIGHT_ARROW" && x != 4) {
+          nextGrid[x+1][y] === grid[x][y];
+        }
+        else if (theKey === "LEFT_ARROW" && x != 0) {
+          nextGrid[x-1][y] === grid[x][y];
+        }
+      }
+    }
+  }
+
+  grid = nextGrid;
+
+  return grid;
 }
 
 function displayGrid() {
