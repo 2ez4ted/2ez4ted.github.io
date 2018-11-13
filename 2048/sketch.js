@@ -30,8 +30,20 @@ function keyTyped() {
   if (key === "r") {
     grid = createGrid();
   }
-  else if (key === "UP_ARROW" || key === "DOWN_ARROW" || key === "LEFT_ARROW" || key === "RIGHT_ARROW"){
-    theKey = key;
+  else if (key === "w") {
+    theKey = "w";
+    update();
+  }
+  else if (key === "s") {
+    theKey = "s";
+    update();
+  }
+  else if (key === "d") {
+    theKey = "d";
+    update();
+  }
+  else if (key === "a") {
+    theKey = "a";
     update();
   }
 }
@@ -49,27 +61,22 @@ function update() {
   //go through all the cells
   for (let x = 4; x > 0; x--) {
     for (let y = 0; y < 4; y++) {
-      if (grid[x][y] != 0) {
-        //moving up, down, right or left
-        if (theKey === 'UP_ARROW' && y != 0) {
-          nextGrid[x][y-1] === grid[x][y];
-        }
-        else if (theKey === "DOWN_ARROW" && y != 4) {
-          nextGrid[x][y+1] === grid[x][y];
-        }
-        else if (theKey === "RIGHT_ARROW" && x != 4) {
-          nextGrid[x+1][y] === grid[x][y];
-        }
-        else if (theKey === "LEFT_ARROW" && x != 0) {
-          nextGrid[x-1][y] === grid[x][y];
-        }
+      //moving up, down, right or left
+      if (theKey === "w" && y != 0) {
+        nextGrid[x][y-1] = grid[x][y];
+      }
+      else if (theKey === "s" && y != 4) {
+        nextGrid[x][y+1] = grid[x][y];
+      }
+      else if (theKey === "d" && x != 4) {
+        nextGrid[x+1][y] = grid[x][y];
+      }
+      else if (theKey === "a" && x != 0) {
+        nextGrid[x-1][y] = grid[x][y];
       }
     }
   }
-
-  grid = nextGrid;
-
-  return grid;
+  grid = nextGrid();
 }
 
 function displayGrid() {
