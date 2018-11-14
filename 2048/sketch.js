@@ -62,16 +62,16 @@ function update() {
   for (let x = 4; x > 0; x--) {
     for (let y = 0; y < 4; y++) {
       //moving up, down, right or left
-      if (theKey === "w" && y != 0) {
+      if (theKey === "w" && y !== 0) {
         nextGrid[x][y-1] = grid[x][y];
       }
-      else if (theKey === "s" && y != 4) {
+      else if (theKey === "s" && y !== 4) {
         nextGrid[x][y+1] = grid[x][y];
       }
-      else if (theKey === "d" && x != 4) {
+      else if (theKey === "d" && x !== 4) {
         nextGrid[x+1][y] = grid[x][y];
       }
-      else if (theKey === "a" && x != 0) {
+      else if (theKey === "a" && x !== 0) {
         nextGrid[x-1][y] = grid[x][y];
       }
     }
