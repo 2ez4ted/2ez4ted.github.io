@@ -3,22 +3,22 @@ let cellSize = 105;
 let cellStage;
 
 function setup() {
-	createCanvas(450, 670);
-	grid = [
-		[0, 0, 0, 0],
-		[0, 0, 0, 0],
-		[0, 0, 0, 0],
-		[0, 0, 0, 0]
-	];
-	console.table(grid);
-	//because the game is always starting with 2 random numbers
-	spawn();
-	spawn();
+  createCanvas(450, 670);
+  grid = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0]
+  ];
+  console.table(grid);
+  //because the game is always starting with 2 random numbers
+  spawn();
+  spawn();
 	console.table(grid);
 }
 
 function draw() {
-	background(255, 204, 153);
+  background(255, 204, 153);
   textSize(60);
   fill(0);
   text("2048", 15, 60);
@@ -26,59 +26,59 @@ function draw() {
 }
 
 function keyTyped() {
-	if (key === 'd') {
-		for (let i = 0; i < 4; i++) {
-			grid[i] = moveRight(grid[i]);
-		}
-		spawn();
-	}
-	if (key === 'a') {
-		for (let i = 0; i < 4; i++) {
-			grid[i] = moveLeft(grid[i]);
-		}
-		spawn();
-	}
+  if (key === "d") {
+    for (let i = 0; i < 4; i++) {
+      grid[i] = moveRight(grid[i]);
+    }
+    spawn();
+  }
+  if (key === "a") {
+    for (let i = 0; i < 4; i++) {
+      grid[i] = moveLeft(grid[i]);
+    }
+    spawn();
+  }
 }
 
 
 //the following functions are correspondant to each directions
 function swipeRight(row) {
-	let arr = row.filter(cellStage => cellStage);
-	let missing = 4 - arr.length;
-	let zeros = Array(missing).fill(0);
-	arr = zeros.concat(arr);
-	return arr;
+  let arr = row.filter(cellStage => cellStage);
+  let missing = 4 - arr.length;
+  let zeros = Array(missing).fill(0);
+  arr = zeros.concat(arr);
+  return arr;
 }
 
 function combineRight(row) {
-	for (let i = 3; i >= 1; i--) {
-		let a = row[i];
-		let b = row[i - 1];
-		if (a === b) {
-			row[i] = a+b;
-			row[i - 1] = 0;
-		}
-	}
-	return row;
+  for (let i = 3; i >= 1; i--) {
+    let a = row[i];
+    let b = row[i - 1];
+    if (a === b) {
+      row[i] = a+b;
+      row[i - 1] = 0;
+    }
+  }
+  return row;
 }
 
 function moveRight(row) {
-	row = swipeRight(row);
-	row = combineRight(row);
-	row = swipeRight(row);
-	return row;
+  row = swipeRight(row);
+  row = combineRight(row);
+  row = swipeRight(row);
+  return row;
 }
 
 function swipeLeft(row) {
-	let arr = row.filter(cellStage => cellStage);
-	let missing = 4 - arr.length;
-	let zeros = Array(missing).fill(0);
-	arr = arr.concat(zeros);
-	return arr;
+  let arr = row.filter(cellStage => cellStage);
+  let missing = 4 - arr.length;
+  let zeros = Array(missing).fill(0);
+  arr = arr.concat(zeros);
+  return arr;
 }
 
 function combineLeft(row) {
-	for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 4; i++) {
 		let a = row[i];
 		let b = row[i + 1];
 		if (a === b) {
@@ -137,10 +137,12 @@ function spawn() {
 			}
 		}
 	}
-	if(spawnLocation.length > 0);
-	let spot = random(spawnLocation);
-	let newSpawnNumber = [2, 4]; //it is either 2 or 4
-	grid[spot.x][spot.y] = random(newSpawnNumber);
+	if(spawnLocation.length > 0) {
+		let spot = random(spawnLocation);
+		let newSpawnNumber = [2, 4]; //it is either 2 or 4
+		grid[spot.x][spot.y] = random(newSpawnNumber);
+	}
+
 }
 
 function displayGrid() {
@@ -213,7 +215,7 @@ function displayGrid() {
         fill(255, 0, 255); //fill for value 1024
         rect(x*cellSize, y*cellSize, cellSize, cellSize);
         fill(255);
-				textSize(40);
+        textSize(40);
         text("1024", x*cellSize + 8.75 , y*cellSize + 65);
 				textSize(60);
       }
