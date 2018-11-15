@@ -40,6 +40,8 @@ function keyTyped() {
 	}
 }
 
+
+//the following functions are correspondant to each directions
 function swipeRight(row) {
 	let arr = row.filter(cellStage => cellStage);
 	let missing = 4 - arr.length;
