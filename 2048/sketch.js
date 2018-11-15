@@ -9,12 +9,17 @@ let startingStages = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 let cellStage = 0;
 let cellSize = 105;
 let theKey;
+let score;
+let terminate;
+let completed;
 
 
 
 
 function setup() {
   createCanvas(450, 670);
+  terminate = false;
+  completed = false;
   grid = createGrid();
 }
 
@@ -49,35 +54,40 @@ function keyTyped() {
 }
 
 function update() {
-  //generate a second grid
-  let nextGrid = [];
-  for (let i = 0; i < 4; i++) {
-    nextGrid.push([]);
-    for (let j = 0; j < 4; j++) {
-      nextGrid[i].push([]);
-    }
+  background(255, 204, 153);
+  // updateScore();
+  updateGrid();
+  if (terminate) {
+    displayGameOver();
+  }
+  if (completed) {
+    display2048();
+  }
+}
+
+function updateGrid() {
+  //need a second 2d array, so you don't mess up the first one
+  let nextTurn = [];
+  for (let i = 0; i < rows; i++) {
+    nextTurn[i] = [];
   }
 
-  //go through all the cells
-  for (let x = 4; x > 0; x--) {
+  for (let x = 3; x > 0; x--){
     for (let y = 0; y < 4; y++) {
-      //moving up, down, right or left
-      if (theKey === "w" && y != 0) {
-        nextGrid[x][y-1] = grid[x][y];
-      }
-      else if (theKey === "s" && y != 4) {
-        nextGrid[x][y+1] = grid[x][y];
-      }
-      else if (theKey === "d" && x != 4) {
-        nextGrid[x+1][y] = grid[x][y];
-      }
-      else if (theKey === "a" && x != 0) {
-        nextGrid[x-1][y] = grid[x][y];
+      //check the previous grid
+      if (thekey === "w") {
+        let pushCounter;
+        while (grid[x][y-1] === 0) {
+
+        }
       }
     }
   }
-  grid = nextGrid();
 }
+
+
+
+
 
 function displayGrid() {
   translate(15, 100);
