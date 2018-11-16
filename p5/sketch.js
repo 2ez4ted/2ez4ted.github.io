@@ -10,6 +10,7 @@ let grid;
 let cellSize = 105;
 let cellStage;
 let score = 0;
+let stage = 0;
 
 
 //**************************
@@ -30,6 +31,22 @@ function setup() {
 }
 
 function draw() {
+
+  if (stage === 0) {
+    displayGrid();
+  }
+  else if (stage === 1) {
+    victory();
+  }
+  else if (stage === 2) {
+    reportError();//in case if someone rigged the code
+  }
+}
+
+//*****************************
+//Visual Display of the program
+//*****************************
+function displayGrid() {
   noStroke();
   background(255, 204, 153);
 
@@ -40,20 +57,13 @@ function draw() {
   fill(0);
   text("2048", 15, 60);
 
-  displayGrid();
-}
-
-//*****************************
-//Visual Display of the program
-//*****************************
-function displayGrid() {
   fill(115);
   translate(15, 100);
-	strokeWeight(3);
+  strokeWeight(3);
   stroke(115);
   for (let x = 0; x < 4; x++) {
     for (let y = 0; y < 4; y++) {
-			cellStage = grid[y][x];
+      cellStage = grid[y][x];
       if (cellStage === 0) {
         fill(164); //fill for value none
         rect(x*cellSize, y*cellSize, cellSize, cellSize);
@@ -81,7 +91,6 @@ function displayGrid() {
         rect(x*cellSize, y*cellSize, cellSize, cellSize);
         fill(255);
         text("16", x*cellSize + 18.75 , y*cellSize + 75);
-
       }
       else if (cellStage === 32) {
         fill(255, 102, 0); //fill for value 32
@@ -119,30 +128,37 @@ function displayGrid() {
         fill(255);
         textSize(40);
         text("1024", x*cellSize + 8.75 , y*cellSize + 65);
-				textSize(60);
       }
       else if (cellStage === 2048) {
         fill(255, 0, 0); //fill for value 2048
         rect(x*cellSize, y*cellSize, cellSize, cellSize);
         fill(0);
-				textSize(40);
+        textSize(40);
         text("2048", x*cellSize + 8.75 , y*cellSize + 65);
-				textSize(60);
-        victory();//at this moment you win the game
+        stage = 1;//at this moment you win the game
       }
       else {
-        reportError();//something wrong happenes like if you rigged the code
+        stage = 2;
       }
+      translate(0, 0);
     }
   }
 }
 
 function victory() {
-  translate(0, 0);
   background(255);
-  stroke(0);
-  textAlign(CENTER, CENTER);
-  text("You lost, your score is " + score + " good luck next time.");
+  noStroke();
+  fill(0);
+  textSize(11);
+  text("Congratulations! You have won the game! Press R to restart.", 100, 335);
+}
+
+function reportError() {
+  background(255);
+  noStroke();
+  fill(0);
+  textSize(11);
+  text("Ooops! Something went wrong! Press R to restart.", 100, 335);
 }
 
 //******************************
@@ -200,6 +216,19 @@ function keyPressed() {//shift to a direction
       spawn();
     }
   }
+
+  else if (keyCode === 82) {//restart
+    stage = 0;
+    grid = [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0]
+    ];
+
+    spawn();
+    spawn();
+  }
 }
 
 //the following functions are correspondant to each direction, due to the nature of arrays increasing in number is 'Positive', decreasing in number is 'Negative'
@@ -240,21 +269,21 @@ function swipeNegative(row) {
 
 function combineNegative(row) {
   for (let i = 0; i < 4; i++) {
-		let a = row[i];
-		let b = row[i + 1];
-		if (a === b) {
-			row[i] = a + b;
-			row[i + 1] = 0;
-		}
-	}
-	return row;
+    let a = row[i];
+    let b = row[i + 1];
+    if (a === b) {
+      row[i] = a + b;
+      row[i + 1] = 0;
+    }
+  }
+  return row;
 }
 
 function moveNegative(row) {
-	row = swipeNegative(row);
-	row = combineNegative(row);
-	row = swipeNegative(row);
-	return row;
+  row = swipeNegative(row);
+  row = combineNegative(row);
+  row = swipeNegative(row);
+  return row;
 }
 
 function rotateGrid(someGrid) {//this function rotate the grid therefore the functions above, which only apply to rows could also apply to columns
@@ -271,29 +300,29 @@ function rotateGrid(someGrid) {//this function rotate the grid therefore the fun
     }
   }
 
-  for (i = 0; i < 4; i++) {
+  for (let i = 0; i < 4; i++) {
     rotatedGrid[i] = reverse(rotatedGrid[i]);
   }
   return rotatedGrid;
 }
 
 function spawn() {//this function applies to all cases that a new number is threw in
-	let spawnLocation = [];
-	for (let i = 0; i < 4; i++) {
-		for  (let j = 0; j < 4; j++) {
-			if (grid[i][j] === 0) {
-				spawnLocation.push({
-					x: i,
-					y: j
-				});
-			}
-		}
-	}
-	if(spawnLocation.length > 0) {
-		let spot = random(spawnLocation);
-		//it is either 2 or 4
-		grid[spot.x][spot.y] = random([2, 4]);
-	}
+  let spawnLocation = [];
+  for (let i = 0; i < 4; i++) {
+    for  (let j = 0; j < 4; j++) {
+      if (grid[i][j] === 0) {
+        spawnLocation.push({
+          x: i,
+          y: j
+        });
+      }
+    }
+  }
+  if(spawnLocation.length > 0) {
+    let spot = random(spawnLocation);
+    //it is either 2 or 4
+    grid[spot.x][spot.y] = random([2, 4]);
+  }
 }
 
 function recordGrid(someGrid) {
