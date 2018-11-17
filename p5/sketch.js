@@ -31,15 +31,24 @@ function setup() {
 }
 
 function draw() {
+  if (canYouMove() === false) {
+    stage = 3;//player lost. No more cell can be moved
+  }
 
   if (stage === 0) {
-    displayGrid();
+    displayGrid();//normal gaming stage
   }
   else if (stage === 1) {
-    victory();
+    victory();//tile 2048 achieved. Player victory
   }
   else if (stage === 2) {
-    reportError();//in case if someone rigged the code
+    reportError();//cellStage out of boundary, errors occur
+  }
+  else if (stage === 3) {
+    lost();
+  }
+  else {
+    reportError();
   }
 }
 
@@ -47,6 +56,7 @@ function draw() {
 //Visual Display of the program
 //*****************************
 function displayGrid() {
+
   noStroke();
   background(255, 204, 153);
 
@@ -56,6 +66,7 @@ function displayGrid() {
   textSize(60);
   fill(0);
   text("2048", 15, 60);
+  text(score, 300, 60);
 
   fill(115);
   translate(15, 100);
@@ -161,16 +172,24 @@ function reportError() {
   text("Ooops! Something went wrong! Press R to restart.", 100, 335);
 }
 
+function lost() {
+  background(255);
+  noStroke();
+  fill(0);
+  textSize(11);
+  text("You LOST! Your score is " + score + ". Press R to restart.", 100, 335);
+}
+
 //******************************
 //functional part of the program
 //******************************
 function keyPressed() {//shift to a direction
   if (keyCode === 68) {//shift right
-    let previous = recordGrid(grid); //trace the current board. function @ line 277
+    let previous = recordGrid(grid); //trace the current board. function @ line 350
     for (let i = 0; i < 4; i++) {
       grid[i] = movePositive(grid[i]);
     }
-    let comparison = compareGrid(previous, grid); //see if there are any changes after player moved to certain directions, if not then do not spawn/ function @ line 292
+    let comparison = compareGrid(previous, grid); //see if there are any changes after player moved to certain directions, if not then do not spawn/ function @ line 331
     if (comparison) {
       spawn();
     }
@@ -219,6 +238,7 @@ function keyPressed() {//shift to a direction
 
   else if (keyCode === 82) {//restart
     stage = 0;
+    score = 0;
     grid = [
       [0, 0, 0, 0],
       [0, 0, 0, 0],
@@ -246,6 +266,7 @@ function combinePositive(row) {
     let b = row[i - 1];
     if (a === b) {
       row[i] = a + b;
+      score += row[i];
       row[i - 1] = 0;
     }
   }
@@ -273,6 +294,7 @@ function combineNegative(row) {
     let b = row[i + 1];
     if (a === b) {
       row[i] = a + b;
+      score += row[i];
       row[i + 1] = 0;
     }
   }
@@ -345,6 +367,23 @@ function compareGrid(gridA, gridB) {
     for (let y = 0; y < 4; y++) {
       if (gridA[x][y] !== gridB[x][y]) {
         return true; //something moved
+      }
+    }
+  }
+  return false;
+}
+
+function canYouMove() {
+  for (let x = 0; x < 4; x++) {
+    for (let y = 0; y < 4; y++) {
+      if (grid[x][y] === 0) {
+        return true;
+      }
+      if (y !== 3 && grid[x][y] === grid[x][y + 1]) {
+        return true;
+      }
+      if (x !== 3 && grid[x][y] === grid[x + 1][y]) {
+        return true;
       }
     }
   }
