@@ -43,15 +43,20 @@ class Ball{
     // otherBall  = new Ball;
     if (dist(this.x, this.y, otherBall.x, otherBall.y) <= this.radius + otherBall.radius) {
       this.isCollidingRightNow = true;
-      // otherBall.isCollidingRightNow = true;
-      this.dx *= -1;
-      this.dy *= -1;
-      otherBall.dx *= -1;
-      otherBall.dx *= -1;
+      otherBall.isCollidingRightNow = true;
+      let temDx = this.dx;
+      let temDy = this.dy;
+      this.dx = otherBall.dx;
+      this.dy = otherBall.dy;
+      otherBall.dx = temDx;
+      otherBall.dy = temDy;
+
+      // otherBall.dx *= -1;
+      // otherBall.dx *= -1;
     }
     else {
       this.isCollidingRightNow = false;
-      // otherBall.isCollidingRightNow = false;
+      otherBall.isCollidingRightNow = false;
     }
   }
 }
@@ -66,7 +71,8 @@ function setup() {
 function draw() {
   background(0);
   for (let i = ballArray.length - 1; i >= 0; i--) {
-    for (let j = ballArray.length - 1; j >= 0; j --) {
+    ballArray[i].isCollidingRightNow = false;
+    for (let j = 0; j < ballArray.length; j ++) {
       if (i !== j) {
         ballArray[i].checkForCollision(ballArray[j]);
       }
