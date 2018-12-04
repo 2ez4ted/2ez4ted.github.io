@@ -16,6 +16,7 @@ function setup() {
   rows = grid[0].length;
   cols = grid[0].length;
   cellSize = windowHeight / rows;
+  spawnFruit();
   cleanUpTheGrid();
 }
 
@@ -61,6 +62,7 @@ function cleanUpTheGrid() {
 }
 
 function displayGrid() {
+  //Luke
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
       if (grid[y][x] === "0") {
@@ -76,7 +78,34 @@ function displayGrid() {
         fill(255, 0, 0);
         rect(x*cellSize, y*cellSize, cellSize, cellSize);
       }
+      //Teddy
+      else if (grid[y][x] === "3") {
+        fill("red");
+        rect(x*cellSize, y*cellSize, cellSize, cellSize);
+      }
     }
+  }
+}
+
+function mouseClicked() {
+  spawnFruit();
+}
+
+function spawnFruit() {//this function applies to all cases that a new number is threw in
+  let spawnLocation = [];
+  for (let i = 0; i < rows; i++) {
+    for  (let j = 0; j < cols; j++) {
+      if (grid[i][j] === 0) {
+        spawnLocation.push({
+          x: i,
+          y: j
+        });
+      }
+    }
+  }
+  if (spawnLocation.length > 0) {
+    let spot = random(spawnLocation);
+    grid[spot.x][spot.y] = "3";
   }
 }
 
