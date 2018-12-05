@@ -10,6 +10,8 @@ class Snake {
     this.y = 0;
     this.xSpeed = 0;
     this.ySpeed = 0;
+    this.length = 0;
+    this.end = [];
   }
 
   dir(x, y) {//direction of the snake, simply up down left right called down below
@@ -18,6 +20,13 @@ class Snake {
   }
 
   update() {//move the snake
+    if (this.length === this.end.length) {
+      for (let i = 0; i < this.end.length-1; i++) {
+        this.end[i] = this.end[i+1];
+      }
+    }
+    this.end[this.length-1] = createVector(this.x, this.y);
+
     this.x += this.xSpeed;
     this.y += this.ySpeed;
 
@@ -27,7 +36,21 @@ class Snake {
 
   display() {
     fill(255);
+    for (let i = 0; i < this.end.length; i++) {
+      rect(this.end[i].x, this.end[i].y, cellSize, cellSize);
+    }
     rect(this.x, this.y, cellSize, cellSize);
+  }
+
+  eat(fruit) {
+    let dis = dist(this.x, this.y, fruit.x, fruit.y);
+    if (dis < 2) {
+      this.length ++;
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 }
 
@@ -56,7 +79,7 @@ function setup() {
   createCanvas(600, 600);
   someSnake = new Snake;
   someFruit = new Fruit;
-  frameRate(3);
+  frameRate(10);
 }
 
 function draw() {
@@ -64,6 +87,10 @@ function draw() {
   someSnake.update();
   someSnake.display();
   someFruit.display();
+  if (someSnake.eat(someFruit) === true) {
+    someFruit = new Fruit;
+    someFruit.display();
+  }
 }
 
 function keyPressed() {
