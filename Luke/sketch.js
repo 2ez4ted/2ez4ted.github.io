@@ -4,7 +4,19 @@
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
+
+// loading graphics (luke)
+let apple;
+let snakeBody;
+let snakeHead;
+function preload() {
+  apple = loadImage("assets/apple.png");
+  snakeBody = loadImage("assets/snakebody.png");
+  snakeHead = loadImage("assets/snakehead.png");
+}
+
 class Snake {
+  // setting values (Teddy)
   constructor() {
     this.x = 0;
     this.y = 0;
@@ -14,14 +26,14 @@ class Snake {
     this.end = [];
   }
 
-  dir(x, y) {//direction of the snake, simply up down left right, called down below
+  dir(x, y) {//direction of the snake, simply up down left right called down below (Teddy)
     this.xSpeed = x;
     this.ySpeed = y;
   }
 
-  update() {//move the snake
+  update() {//move the snake (Teddy)
     if (this.length === this.end.length) {
-      for (let i = 0; i < this.end.length-1; i++) {
+      for (let i = 0; i < this.length-1; i++) {
         this.end[i] = this.end[i+1];
       }
     }
@@ -29,17 +41,19 @@ class Snake {
 
     this.x += this.xSpeed;
     this.y += this.ySpeed;
-
-    this.x = constrain(this.x, 0, 600-cellSize);
-    this.y = constrain(this.y, 0, 600-cellSize);
   }
 
+  // display function redone (luke)
   display() {
-    fill(255);
-    for (let i = 0; i < this.end.length; i++) {
-      rect(this.end[i].x, this.end[i].y, cellSize, cellSize);
+    //adding graphics (luke)
+    image(snakeHead, this.x, this.y, cellSize, cellSize);
+    for (let i = 0; i < this.length; i++) {
+      // die from going off screen (luke)
+      if (this.x < 0 || this.y < 0 || this.x > 600 || this.y > 600){
+        remove();
+      }
+      image(snakeBody, this.end[i].x, this.end[i].y, cellSize, cellSize);
     }
-    rect(this.x, this.y, cellSize, cellSize);
   }
 
   eat(fruit) {
@@ -54,36 +68,36 @@ class Snake {
   }
 }
 
+// apple (teddy)
 class Fruit {
   constructor() {
     let cols = 600 / cellSize;
     let rows = 600 / cellSize;
-
+    let apple = "assets/apple.png";
     this.x = cellSize * floor(random(cols));
     this.y = cellSize * floor(random(rows));
   }
-
+  // giviong apple graphics (luke)
   display() {
-    fill("red");
-    rect(this.x, this.y, cellSize, cellSize);
+    image(apple, this.x, this.y, cellSize, cellSize);
   }
 }
-
 
 let someSnake;
 let someFruit;
 let cellSize = 20;
 
-
+// setup (teddy)
 function setup() {
   createCanvas(600, 600);
   someSnake = new Snake;
   someFruit = new Fruit;
-  frameRate(10);
+  frameRate(5);
 }
 
+// draw function (teddy)
 function draw() {
-  background(0);
+  background(50);
   someSnake.update();
   someSnake.display();
   someFruit.display();
@@ -93,12 +107,14 @@ function draw() {
   }
 }
 
+// directional input (teddy)
 function keyPressed() {
   if (keyCode === UP_ARROW) {
     someSnake.dir(0, -cellSize);
   }
   else if (keyCode === DOWN_ARROW) {
     someSnake.dir(0, cellSize);
+
   }
   else if (keyCode === RIGHT_ARROW) {
     someSnake.dir(cellSize, 0);
