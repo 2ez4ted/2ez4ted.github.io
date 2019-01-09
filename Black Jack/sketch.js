@@ -11,7 +11,7 @@ class Card {
     if (cardNumber > 10) {
       cardNumber = 10;
     }
-    else if (cardNumber = 1) {
+    else if (cardNumber === 1) {
       this.aceDuality = true;
     }
 
@@ -19,22 +19,31 @@ class Card {
     this.cardNumber = cardNumber;
   }
 
+  createCard(cardColor, cardNumber)
+
 
 }
 
 let cardColorList = ["C", "S", "H", "D"]; //club, spade, heart and diamond
 let cardNumberList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-let hand = new Card;
+let card = new Card;
 
 function setup() {
 
 }
 
 function createDeck() {
-  for (i = 0; i < cardColorList.length-1; i++) {
-    cardColor = cardColorList[i];
-    for (j = 0; j < cardNumberList.length-1; j++) {
-      cardNumber = cardNumberList[j];
+  deck = [];
+
+  for (i = 0; i < 8; i++) {
+    for (j = 0; j < cardColorList.length; j++) {
+      for (v = 0; v < cardNumberList; v++) {
+        deck.push(card(j, v));
+      }
     }
   }
+}
+
+function shuffledeck() {
+  shuffle(deck);
 }
