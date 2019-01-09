@@ -22,4 +22,3 @@ Rules:
     if No double:
       choose to hit or stay;
       if hand is bigger than 21, player busts and losses this turn.
-      
