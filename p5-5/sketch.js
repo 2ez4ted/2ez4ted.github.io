@@ -66,6 +66,20 @@ function setup() {
   if (!hitStayBool) {
     drawCard(house);
 
+    while (calculateVal(house) < 17) {
+      drawCard(house);
+    }
+
+
+  }
+
+  else if (hitStayBool) {
+    drawCard(hand);
+    if (calculateVal(hand) > 21) {
+      discard(hand);
+      discard(house);
+      
+    }
   }
 }
 
