@@ -13,6 +13,10 @@ class Card {
     this.xLength = 20;
     this.yLength = 30;
 
+    this.val = cardNumber;
+    if (this.val >= 10) {
+      this.val = 10;
+    }
   }
 
   display(x, y) {
@@ -27,6 +31,10 @@ class Card {
 let deck = [];
 let hand = [];
 let house = [];
+let hitStayDialog;
+let hitStayBool = false;
+let asset = 1000;
+let stake = 0;
 let cardColorList = ["heart", "spade", "club", "diamond"]; //club, spade, heart and diamond
 let cardNumberList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 let someCard;
@@ -37,8 +45,28 @@ function setup() {
   addDeck(4);
   burnDeck();
 
+  stake = prompt("What's your bet?");
+  stake = int(stake);
+  constrain(stake, 1, asset);
+  asset -= stake;
+
   drawCard(hand);
-  print
+  drawCard(house);
+  drawCard(hand);
+  drawCard(house);
+
+  hitStayDialog = prompt("The house has," + house[0].val + " you have " + hand[0].val + " " + hand[1].val + " hit or stay?");
+  if (hitStayDialog === "hit") {
+    hitStayBool = true;
+  }
+  else {
+    hitStayBool = false;
+  }
+
+  if (!hitStayBool) {
+    drawCard(house);
+
+  }
 }
 
 function draw() {
