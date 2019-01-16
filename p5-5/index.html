@@ -4,11 +4,37 @@
     <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
     <link rel="stylesheet" href="css/fullscreenp5.css">
     <script src="js/p5.min.js"></script>
+    <script src="lib/p5.play.js" type="text/javascript"></script>
     <!-- <script src="js/p5.dom.min.js"></script> -->
     <!-- <script src="js/p5.sound.min.js"></script> -->
     <!-- <script src="js/p5.collide2d.min.js"></script> -->
     <script src="sketch.js"></script>
   </head>
+
+
+
+
   <body>
+    <CENTER><H2>BlackJack</H2></CENTER>
+    <CENTER>Click Shuffle to play</CENTER>
+    <HR>
+    <CENTER>
+    <FORM>
+    <TABLE BORDER=3>
+    <TR>
+      <TD>Dealer: </TD>
+      <TD><INPUT TYPE=TEXT NAME=calculateVal(house) size="20"></TD>
+    </TR>
+    <TR>
+      <TD>You: </TD>
+      <TD><INPUT TYPE=TEXT NAME=calculateVal(hand) size="20"></TD>
+    </TR>
+    </TABLE>
+    <P>
+    <CENTER>
+    <INPUT TYPE=BUTTON VALUE="Hit" onClick=drawCard(hand)>
+    <INPUT TYPE=BUTTON VALUE="Stay" onClick="drawCard(house);turnResult();">
+    <INPUT TYPE=BUTTON VALUE="Shuffle" onClick="deleteDeck();addDeck(4);burnDeck();drawCard(hand);drawCard(house)">
+    </CENTER>
   </body>
 </html>

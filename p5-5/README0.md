@@ -54,6 +54,9 @@ milestone:
   Dec 25, 2018, came up with the basic logic
   Dec 29, 2018, rewrote the need to Have and nice to Have
 
+  Between Dec 22 and Jan 7, I was working on some Trap Adventure game but failed to continue due to multiple factors. Then I restarted
+  working on Blackjack.
+
   Jan 3, 2019, put down some sketches
   Jan 6, 2019, replaced default p5 shuffle function with Fischer-Yates shuffle
   Jan 11, 2019, finished composing the basic functions (and some stem codes of the functioning part)
