@@ -31,10 +31,10 @@ function setupButtons() {
 
   shuffleButton = createButton("shuffle");
   shuffleButton.position(360, 510);
-  shuffleButton.mousePressed(resetGame)
+  shuffleButton.mousePressed(resetTurn)
 }
 
-function resetGame() {
+function resetTurn() {
   deleteDeck();
   discard(hand);
   discard(house);
@@ -54,10 +54,7 @@ function playerHit() {
     gameStage = 2;
   }
   else {
-    discard(hand);
-    discard(house);
-
-    console.log("YOU BUST. Turn lost.");
-    gameStage = 0;
+    alert("YOU BUST. Turn lost.");
+    resetTurn();
   }
 }
