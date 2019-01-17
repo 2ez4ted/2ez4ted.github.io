@@ -21,6 +21,9 @@ let stayButton;
 let shuffleButton;
 let gameStage = -1; //-1 is game hasnt started, 0 is turn has not yet started, 1 is player decision making after having initial cards, 2 is player is still available to hit for more cards
 
+
+
+
 function setup() {
   createCanvas(360, 540);
   setupButtons();
