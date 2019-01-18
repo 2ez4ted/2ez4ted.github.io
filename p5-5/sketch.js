@@ -4,26 +4,6 @@
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
-let deck = [];
-let hand = [];
-let house = [];
-let hitStayDialog;
-let hitStayBool = false;
-let asset = 1000;
-let stake = 0;
-let cardColorList = ["heart", "spade", "club", "diamond"]; //club, spade, heart and diamond
-let cardNumberList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-let someCard;
-let betButton;
-let bet;
-let hitButton;
-let stayButton;
-let shuffleButton;
-let gameStage = -1; //-1 is game hasnt started, 0 is turn has not yet started, 1 is player decision making after having initial cards, 2 is player is still available to hit for more cards
-
-
-
-
 function setup() {
   createCanvas(360, 540);
   setupButtons();
@@ -33,20 +13,47 @@ function draw() {
   background("green");
   canvasChars();
 
+  //gameStage: -1 = Main menu. Intro page.
+  //0, start of a turn. 2 cards in hand and 2 cards in dealer's hand.
+  //1, turn undergoing, player can choose to hit or stay.
+  //2, turn continuing, player has finished his play and the house draw cards till over 16.
 
+  if (gameStage === -1) {
+    text("click shuffle to continue", 180, 280);
 
-  if (gameStage === 0) {
-    displayCards(hand, 10, 500);
-
-    house[0].display(10, 40);
-    house[1].displayBack(35, 40);
+    push();
+    fill("red");
+    rect(340, 430, 20, 20);
+    rect(340, 520, 20, 20);
+    pop();
   }
 
-  if (gameStage === 2) {
+  else if (gameStage === 0 || gameStage === 1) {
+    text("Hand: " + calculateVal(hand), 10, 480);
     displayCards(hand, 10, 500);
 
     house[0].display(10, 40);
     house[1].displayBack(35, 40);
+
+
+    push();
+    fill("red");
+    rect(340, 460, 20, 20);
+    rect(340, 490, 20, 20);
+    pop();
+  }
+
+  else if (gameStage === 2) {
+    text("Hand: " + calculateVal(hand), 10, 480);
+    displayCards(hand, 10, 500);
+
+    text("Dealer: " + calculateVal(house), 10, 90);
+    displayCards(house, 10, 40);
+
+    push();
+    fill("red");
+    rect(340, 430, 20, 20);
+    pop();
   }
 }
 

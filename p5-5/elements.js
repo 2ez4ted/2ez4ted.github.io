@@ -33,3 +33,22 @@ class Card {
     rect(this.x, this.y, this.xLength, this.yLength);
   }
 }
+
+let deck = [];
+let hand = [];
+let house = [];
+
+let asset = 1000;
+let stake = 0;
+
+let cardColorList = ["heart", "spade", "club", "diamond"]; //club, spade, heart and diamond
+let cardNumberList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+let someCard;
+
+let betButton;
+let bet;
+let hitButton;
+let stayButton;
+let shuffleButton;
+
+let gameStage = -1;

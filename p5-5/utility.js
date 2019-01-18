@@ -21,6 +21,7 @@ function setupButtons() {
 
   betButton = createButton("submit");
   betButton.position(bet.x + bet.width, bet.y);
+  betButton.mousePressed(initializeTurn);
 
   hitButton = createButton("Hit");
   hitButton.position(360, 540);
@@ -28,33 +29,73 @@ function setupButtons() {
 
   stayButton = createButton("stay");
   stayButton.position(360, 570);
+  stayButton.mousePressed(playerStay);
 
   shuffleButton = createButton("shuffle");
   shuffleButton.position(360, 510);
-  shuffleButton.mousePressed(resetTurn)
+  shuffleButton.mousePressed(resetTurn);
 }
 
 function resetTurn() {
-  deleteDeck();
+  gameStage = -1;
+  discard(deck);
+  discard(deck);
+  discard(deck);
+  discard(hand);
+  discard(house);
+  discard(hand);
+  discard(house);
   discard(hand);
   discard(house);
 
   addDeck(4);
-  burnDeck();
-  drawCard(hand);
-  drawCard(house);
-  drawCard(hand);
-  drawCard(house);
+  burnDeck(deck);
+}
+
+function initializeTurn() {
+  drawCard(hand, deck);
+  drawCard(house, deck);
+  drawCard(hand, deck);
+  drawCard(house, deck);
   gameStage = 0;
+
+  if ((hand[0].cardNumber === 1 && hand[1].cardNumber === 11) || (hand[0].cardNumber === 1 && hand[1].cardNumber === 11)) {
+    alert("BLACKJACK!");
+    gameStage = -1;
+  }
 }
 
 function playerHit() {
-  drawCard(hand);
+  drawCard(hand, deck);
   if (calculateVal(hand) <= 21) {
-    gameStage = 2;
+    gameStage = 1;
   }
   else {
-    alert("YOU BUST. Turn lost.");
-    resetTurn();
+    alert("Player has busted.");
+    gameStage = -1;
+  }
+}
+
+function playerStay() {
+  while (calculateVal(house) < 17) {
+    drawCard(house, deck);
+  }
+
+  gameStage = 2;
+
+  if (calculateVal(house) <= 21) {
+    if (calculateVal(house) < calculateVal(hand)) {
+      alert("Player won.");
+    }
+    else if (calculateVal(house) === calculateVal(hand)) {
+      alert("PUSH!");
+    }
+    else if (calculateVal(house) > calculateVal(hand)) {
+      alert("Dealer has more. Player lost.");
+    }
+  }
+
+  else {
+    alert("Dealer has busted. Player won.");
   }
 }
