@@ -50,6 +50,7 @@ function resetTurn() {
 
   addDeck(4);
   burnDeck(deck);
+  gameStage = -1.5;
 }
 
 function initializeTurn() {

@@ -24,6 +24,14 @@ function draw() {
     push();
     fill("red");
     rect(340, 430, 20, 20);
+    pop();
+  }
+
+  else if (gameStage === -1.5) {
+    text("click submit to continue", 180, 280);
+
+    push();
+    fill("red");
     rect(340, 520, 20, 20);
     pop();
   }
