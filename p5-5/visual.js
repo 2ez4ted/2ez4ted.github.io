@@ -50,6 +50,9 @@ let diamond10;
 let diamond11;
 let diamond12;
 let diamond13;
+let cardBack;
+
+
 
 function preload() {
   heart1 = loadImage("assets/heart_A.png");
@@ -104,10 +107,13 @@ function preload() {
   diamond11 = loadImage("assets/diamond_J.png");
   diamond12 = loadImage("assets/diamond_Q.png");
   diamond13 = loadImage("assets/diamond_K.png");
+  cardBack = loadImage("assets/cadBack.png");
 }
+
+
 
 function displayCards(someList, x, y) {
   for (let i = 0; i < someList.length; i++) {
-    someList[i].display(x + 25*i, y);
+    someList[i].display(x + 60*i, y);
   }
 }

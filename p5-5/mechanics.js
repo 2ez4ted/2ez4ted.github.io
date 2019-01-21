@@ -32,8 +32,8 @@ function aShuffle(a) {//Fischer-Yates Shuffle algorithm that gives you legit shu
 }
 
 function discard(someArr) {//a generic function in order to wipe a list out
-  for (let i = 0; i < someArr.length; i ++) {
-    someArr.shift();
+  for (let i = 0; i < someArr.length; i++) {
+    someArr.shift(i);
   }
 }
 
