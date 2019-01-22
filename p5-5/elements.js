@@ -1,3 +1,7 @@
+//this file records the variables and class I used in this program.
+//Preloaded assets are in the visual file.
+
+//basic class of poker cards.
 class Card {
   constructor(cardSuit, cardNumber, x, y) {
     this.cardColor = cardSuit;
@@ -5,11 +9,12 @@ class Card {
     this.x = x;
     this.y = y;
 
-    this.val = cardNumber;
+    this.val = cardNumber; //value of cards are different from their appearances. In blackjack faces all worth 10.
     if (this.val >= 10) {
       this.val = 10;
     }
 
+    //the following argument is specifically for displaying the cards on canvas.
     this.index = this.cardColor + this.cardNumber;
   }
 
@@ -198,8 +203,11 @@ let someCard;
 
 let betButton;
 let bet;
+let betVal;
 let hitButton;
 let stayButton;
 let shuffleButton;
+
+let messageDisplayed = false;
 
 let gameStage = -2;

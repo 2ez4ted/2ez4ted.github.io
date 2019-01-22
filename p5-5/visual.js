@@ -1,3 +1,5 @@
+//this page works exquisitely for preloaded assets.
+
 let heart1;
 let heart2;
 let heart3;
@@ -51,6 +53,8 @@ let diamond11;
 let diamond12;
 let diamond13;
 let cardBack;
+let vegas;
+let bgm;
 
 
 
@@ -108,10 +112,12 @@ function preload() {
   diamond12 = loadImage("assets/diamond_Q.png");
   diamond13 = loadImage("assets/diamond_K.png");
   cardBack = loadImage("assets/cadBack.png");
+  vegas = loadImage("assets/vegas.jpg");
+  bgm = loadSound("assets/shibuya.mp3");
 }
 
 
-
+//displaying cards in an orderly fashion
 function displayCards(someList, x, y) {
   for (let i = 0; i < someList.length; i++) {
     someList[i].display(x + 60*i, y);
