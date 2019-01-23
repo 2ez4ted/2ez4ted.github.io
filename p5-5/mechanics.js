@@ -59,7 +59,7 @@ function discard(someArr) {//a generic function being called to remove every ele
 
 function calculateVal(someArr) {//a generic function that returns the value of a hand, either player's or dealer's
 
-// IT WAS KILLING ME to make ace showing two values, both 1 and 11!
+// IT WAS KILLING ME to make ace show two values, both 1 and 11!
 //Super hard to tackle this function but im super proud as well..
 
   let val = 0;

@@ -22,6 +22,8 @@ class Card {
     this.x = x;
     this.y = y;
     //I am deeply sorry for the incoming 104 lines of hardcoded display mechanism
+    //I thought i can compare the variable names with strings, but I was wrong.
+    //Variable names without specifically implementation returns 'undefined'
     if (this.index === "heart1") {
       image(heart1, this.x, this.y, 60, 90);
     }
