@@ -16,6 +16,27 @@ milestone:
   Jan 19, 2019, removed previous discard function and replaced it with new discard(someArray)
   Jan 21, 2019, finished expressing ACE card in both value === 1 and value === 11.
 
+Github commits:
+  Dec 17, pushed Fallout shelter project to github (before Christmas)
+  Jan 7, pushed blackjack idea to Github
+  Jan 8, pushed blackjack card sorting to github
+  Jan 9, added some sorting algorithm to it
+  Jan 10, attempted some visualizing components
+  Jan 11, pushed need to have and fixed some visual problems
+  Jan 13, pushed home computer version to it
+  Jan 14, pushed certain discard Mechanisms
+  Jan 16, added certain gaming mechanisms for experimental purposes
+  Jan 17, completed writing a html prototype and pushed from home.
+  Jan 17, pushed beta prototype
+  Jan 18, pushed organized version with javascript as the core to it
+  Jan 18, pushed visualized js version to Github
+  Jan 19, pushed js version with slightly better functioning state variables
+  Jan 20, pushed final visualized version
+  Jan 21, pushed final version
+  Jan 23, pushed  this history file to it (separated from proposal.md)
+
+
+
 Beta Test result:
   The game had few functional errors as I was expecting. The entire game has its mainframe set up, but
   I dont think its yet close to finish.
